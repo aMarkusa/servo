@@ -1,10 +1,16 @@
+// Code used to control a servo 
+
 #include <stdio.h>
 #include <driver/ledc.h>
 #include <unistd.h>
 #include <stdio.h>
-#define GPIO_PIN 4
+#include "connect.h"
+
+
+#define PWM_PIN 4  // GPIO-Pin used for pwm signal for servo
 
 void pmw_config(){
+    // Set up timer
     ledc_timer_config_t ledc_timer = {
         .duty_resolution = LEDC_TIMER_8_BIT,
         .speed_mode = LEDC_LOW_SPEED_MODE,
@@ -14,10 +20,11 @@ void pmw_config(){
     };
     ledc_timer_config(&ledc_timer);
     
+    // Set up PWM-channel
     ledc_channel_config_t ledc_channel = {
         .channel = LEDC_CHANNEL_0,
         .duty = 0,
-        .gpio_num = GPIO_PIN,
+        .gpio_num = PWM_PIN,
         .speed_mode = LEDC_LOW_SPEED_MODE,
         .timer_sel = LEDC_TIMER_0,
     };
@@ -40,6 +47,7 @@ void close_door(){
 void app_main(void)
 {
     pmw_config();
+    connect_ESP32();
     while(1){
         open_door();
         sleep(2);
