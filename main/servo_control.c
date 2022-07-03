@@ -47,12 +47,12 @@ void close_door(){
 void app_main(void)
 {
     pmw_config();
-    connect_ESP32();
-    while(1){
+    init_wifi();
+    /*while(1){
         open_door();
         sleep(2);
         close_door();
         sleep(2);
-    }
+    }*/
 }
 
