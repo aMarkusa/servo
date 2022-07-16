@@ -1,11 +1,13 @@
-// Code used to control a servo 
-
-#include <stdio.h>
 #include <driver/ledc.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "connect.h"
 
+#ifndef _SERVO_H_
+#define _SERVO_H_
+
+static const char* SERVO_TAG = "SERVO";
+
+/*################################## PWM CODE ###################################*/
 
 #define PWM_PIN 4  // GPIO-Pin used for pwm signal for servo
 
@@ -33,26 +35,18 @@ void pmw_config(){
     sleep(1);
 
 }
+/*################################### SERVO CODE #################################*/
 
-void open_door(){
+void unlock_door(){
+    ESP_LOGI(SERVO_TAG, "DOOR UNLOCKED.");
     ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, 26);
     ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0);
 }
 
-void close_door(){
+void lock_door(){
+    ESP_LOGI(SERVO_TAG, "DOOR LOCKED.");
     ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, 10);
     ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0);
 }
 
-void app_main(void)
-{
-    pmw_config();
-    init_wifi();
-    /*while(1){
-        open_door();
-        sleep(2);
-        close_door();
-        sleep(2);
-    }*/
-}
-
+#endif /*_SERVO_H_*/

@@ -1,2 +1,2 @@
-idf_component_register(SRCS "servo_control.c"
+idf_component_register(SRCS "main.c"
                     INCLUDE_DIRS ".")
