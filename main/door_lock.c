@@ -12,7 +12,7 @@ void app_main(void)
     //pmw_config();
     //init_wifi();
     //start_webserver();
-    measure();
+    touch_initialize();
 
 
     /*while(1){
